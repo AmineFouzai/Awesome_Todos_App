@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import "package:flutter/material.dart";
-import "package:todo_app/screens/MyAppBar.dart";
+import 'package:flutter/material.dart';
+import 'package:todo_app/screens/MyAppBar.dart';
+import 'package:todo_app/screens/MyTodoList.dart';
 
 class MyScaffold extends StatelessWidget {
   @override
@@ -17,24 +18,16 @@ class MyScaffold extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Center(
-                child: Text("hello ,world!",
-                    style: TextStyle(
-                      color: Colors.black,
-                    )),
-              ),
+              child: Center(child: TodoList()),
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: FloatingActionButton.extended(
-                  icon: Icon(Icons.add_alert),
-                  onPressed: () {
-                    return CupertinoAlertDialog(
-                      title: Text('alert'),
-                      content: Text('alert example'),
-                    );
-                  },
-                  label: Text("Alert")),
+                  icon: Icon(Icons.add),
+                  splashColor: Colors.deepPurple,
+                  onPressed: () => print("pressed"),
+                  backgroundColor: Colors.purpleAccent,
+                  label: Text("Add")),
             ),
           ],
         ),
