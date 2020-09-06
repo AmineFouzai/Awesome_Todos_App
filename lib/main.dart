@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/screens/MyScaffold.dart';
+import 'package:todo_app/screens/Home.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: "app v1",
-    home: MyScaffold(),
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Home(),
+    );
+  }
 }
