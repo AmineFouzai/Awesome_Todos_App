@@ -10,11 +10,38 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<String> _todoItems = [];
-  void _addTodoItem() {
-    setState(() {
-      int index = _todoItems.length;
-      _todoItems.add('Todo Item ' + index.toString());
-    });
+  var Time = new DateTime.now();
+
+  TextEditingController _textFieldController = TextEditingController();
+  _addTodoItem() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Todo'),
+            content: TextField(
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "todo in Dialog"),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text('ADD'),
+                onPressed: () {
+                  setState(() {
+                    _todoItems.add(_textFieldController.text);
+                  });
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 
   Widget _buildTodoItem(BuildContext context) {
@@ -54,41 +81,70 @@ class _HomeState extends State<Home> {
               return await showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text("Delete Confirmation"),
-                    content: const Text(
-                        "Are you sure you want to delete this item?"),
-                    actions: <Widget>[
-                      FlatButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text("Delete")),
-                      FlatButton(
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text("Cancel"),
-                      ),
-                    ],
-                  );
+                  if (direction == DismissDirection.startToEnd) {
+                    return AlertDialog(
+                      title: const Text("Favorite Confirmation"),
+                      content: const Text(
+                          "Are you sure you want to add this item to Favorite?"),
+                      actions: <Widget>[
+                        FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                            },
+                            child: const Text("Add")),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return AlertDialog(
+                      title: const Text("Delete Confirmation"),
+                      content: const Text(
+                          "Are you sure you want to delete this item?"),
+                      actions: <Widget>[
+                        FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                            },
+                            child: const Text("Delete")),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                      ],
+                    );
+                  }
                 },
               );
             },
             onDismissed: (DismissDirection direction) {
               if (direction == DismissDirection.startToEnd) {
                 print("Add to favorite");
+                setState(() {
+                  //change state to push content to favoirte
+                  _todoItems.removeAt(index);
+                });
               } else {
                 print('Remove item');
+                setState(() {
+                  _todoItems.removeAt(index);
+                });
               }
-
-              setState(() {
-                _todoItems.removeAt(index);
-              });
             },
             child: ListTile(
               leading: Icon(
                 Icons.local_activity,
+                color: Colors.purpleAccent,
                 size: 50,
               ),
               title: Text(_todoItems[index]),
-              subtitle: Text("Description text"),
+              subtitle: Text(Time.toString()),
             ),
           );
         }
@@ -122,8 +178,11 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: _buildTodoItem(context),
-      floatingActionButton:
-          FloatingActionButton(child: Icon(Icons.add), onPressed: _addTodoItem),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          backgroundColor: Colors.purpleAccent,
+          splashColor: Colors.purple,
+          onPressed: _addTodoItem),
     ));
   }
 }
