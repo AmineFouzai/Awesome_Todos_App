@@ -1,3 +1,5 @@
+import 'package:fab_circular_menu/fab_circular_menu.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/Menu.dart';
 
@@ -51,13 +53,14 @@ class _HomeState extends State<Home> {
           return Dismissible(
             key: Key('item ${_todoItems[index]}'),
             background: Container(
-              color: Colors.blue,
+              color: Colors.red,
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Icon(Icons.favorite, color: Colors.white),
-                    Text('Move to favorites',
+                    Icon(Icons.delete, color: Colors.white),
+                    Text('Move to trash',
                         style: TextStyle(color: Colors.white)),
                   ],
                 ),
@@ -81,57 +84,33 @@ class _HomeState extends State<Home> {
               return await showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  if (direction == DismissDirection.startToEnd) {
-                    return AlertDialog(
-                      title: const Text("Favorite Confirmation"),
-                      content: const Text(
-                          "Are you sure you want to add this item to Favorite?"),
-                      actions: <Widget>[
-                        FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(true);
-                            },
-                            child: const Text("Add")),
-                        FlatButton(
+                  return AlertDialog(
+                    title: const Text("Delete Confirmation"),
+                    content: const Text(
+                        "Are you sure you want to delete this item?"),
+                    actions: <Widget>[
+                      FlatButton(
                           onPressed: () {
-                            Navigator.of(context).pop(false);
+                            Navigator.of(context).pop(true);
                           },
-                          child: const Text("Cancel"),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return AlertDialog(
-                      title: const Text("Delete Confirmation"),
-                      content: const Text(
-                          "Are you sure you want to delete this item?"),
-                      actions: <Widget>[
-                        FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(true);
-                            },
-                            child: const Text("Delete")),
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(false);
-                          },
-                          child: const Text("Cancel"),
-                        ),
-                      ],
-                    );
-                  }
+                          child: const Text("Delete")),
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        child: const Text("Cancel"),
+                      ),
+                    ],
+                  );
                 },
               );
             },
             onDismissed: (DismissDirection direction) {
               if (direction == DismissDirection.startToEnd) {
-                print("Add to favorite");
                 setState(() {
-                  //change state to push content to favoirte
                   _todoItems.removeAt(index);
                 });
               } else {
-                print('Remove item');
                 setState(() {
                   _todoItems.removeAt(index);
                 });
@@ -156,8 +135,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      drawer: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 60, 0), child: Menu()),
+      // endDrawerEnableOpenDragGesture: false,
+      drawerEnableOpenDragGesture: false,
+      drawer: Container(
+          margin: EdgeInsets.all(0),
+          padding: EdgeInsets.all(0),
+          // color: Colors.white,
+          // padding: const EdgeInsets.fromLTRB(0, 0, 60, 0),
+          child: Menu()),
       appBar: AppBar(
         backgroundColor: Colors.purpleAccent,
         title: Text("Todo App"),
@@ -178,11 +163,36 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: _buildTodoItem(context),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          backgroundColor: Colors.purpleAccent,
-          splashColor: Colors.purple,
-          onPressed: _addTodoItem),
+      floatingActionButton: FabCircularMenu(
+        fabOpenIcon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        fabCloseIcon: Icon(
+          Icons.close,
+          color: Colors.white,
+        ),
+        fabColor: Colors.purpleAccent,
+        fabSize: 60,
+        ringWidth: 50,
+        ringColor: Colors.purpleAccent,
+        ringDiameter: MediaQuery.of(context).size.width * 0.75,
+        fabOpenColor: Colors.purpleAccent,
+        children: <Widget>[
+          IconButton(
+              icon: Icon(Icons.add),
+              color: Colors.white,
+              onPressed: _addTodoItem),
+          IconButton(
+              icon: Icon(Icons.event),
+              color: Colors.white,
+              onPressed: _addTodoItem),
+          IconButton(
+              icon: Icon(Icons.assignment),
+              color: Colors.white,
+              onPressed: _addTodoItem),
+        ],
+      ),
     ));
   }
 }
