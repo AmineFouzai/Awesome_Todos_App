@@ -2,6 +2,7 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/Menu.dart';
+import 'package:todo_app/server/Context.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -11,10 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> _todoItems = [];
+  List<String> _todoItems = todos;
 
   var Time = new DateTime.now();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   TextEditingController _textFieldController = TextEditingController();
 
   _SearchItem() {

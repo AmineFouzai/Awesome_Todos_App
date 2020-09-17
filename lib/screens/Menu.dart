@@ -17,24 +17,28 @@ class Menu extends StatelessWidget {
           alignment: Alignment.topLeft,
           children: <Widget>[
             MenuItem(
+              toolTip: "Home",
               menuItemIcon: Icon(
                 Icons.home,
                 color: Colors.white70,
               ),
             ),
             MenuItem(
+              toolTip: "Events",
               menuItemIcon: Icon(
                 Icons.event,
                 color: Colors.white70,
               ),
             ),
             MenuItem(
+              toolTip: "Assignment",
               menuItemIcon: Icon(
                 Icons.assignment,
                 color: Colors.white70,
               ),
             ),
             MenuItem(
+              toolTip: "Settings",
               menuItemIcon: Icon(
                 Icons.settings,
                 color: Colors.white70,
