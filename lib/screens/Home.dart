@@ -12,9 +12,50 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<String> _todoItems = [];
-  var Time = new DateTime.now();
 
+  var Time = new DateTime.now();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _textFieldController = TextEditingController();
+
+  _SearchItem() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Search'),
+            content: TextField(
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "todo in List"),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text('ok'),
+                onPressed: () {
+                  setState(() {
+                    //_textFieldController.text
+                    if (_todoItems.indexOf(_textFieldController.text) != -1) {
+                      String result = _todoItems[
+                          _todoItems.indexOf(_textFieldController.text)];
+                      _todoItems = [];
+                      _todoItems.add(result);
+                      Navigator.of(context).pop();
+                    } else {
+                      Navigator.of(context).pop();
+                    }
+                  });
+                },
+              )
+            ],
+          );
+        });
+  }
+
   _addTodoItem() {
     return showDialog(
         context: context,
@@ -135,8 +176,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
+      key: _scaffoldKey,
       // endDrawerEnableOpenDragGesture: false,
-      drawerEnableOpenDragGesture: false,
+      // drawerEnableOpenDragGesture: false,
       drawer: Container(
           margin: EdgeInsets.all(0),
           padding: EdgeInsets.all(0),
@@ -144,6 +186,14 @@ class _HomeState extends State<Home> {
           // padding: const EdgeInsets.fromLTRB(0, 0, 60, 0),
           child: Menu()),
       appBar: AppBar(
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          padding: EdgeInsets.fromLTRB(30, 0, 0, 8),
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            _scaffoldKey.currentState.openDrawer();
+          },
+        ),
         backgroundColor: Colors.purpleAccent,
         title: Text("Todo App"),
         centerTitle: true,
@@ -158,7 +208,7 @@ class _HomeState extends State<Home> {
               Icons.search,
               color: Colors.white,
             ),
-            onPressed: null,
+            onPressed: _SearchItem,
           )
         ],
       ),
