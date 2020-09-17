@@ -16,10 +16,30 @@ class Menu extends StatelessWidget {
           ringColor: Colors.purple,
           alignment: Alignment.topLeft,
           children: <Widget>[
-            IconButton(
-                icon: Icon(Icons.add), color: Colors.white, onPressed: null),
-            IconButton(
-                icon: Icon(Icons.add), color: Colors.white, onPressed: null),
+            MenuItem(
+              menuItemIcon: Icon(
+                Icons.home,
+                color: Colors.white70,
+              ),
+            ),
+            MenuItem(
+              menuItemIcon: Icon(
+                Icons.event,
+                color: Colors.white70,
+              ),
+            ),
+            MenuItem(
+              menuItemIcon: Icon(
+                Icons.assignment,
+                color: Colors.white70,
+              ),
+            ),
+            MenuItem(
+              menuItemIcon: Icon(
+                Icons.settings,
+                color: Colors.white70,
+              ),
+            )
           ]),
     );
 
