@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MenuItem extends StatelessWidget {
-  final String title;
   Icon menuItemIcon;
-  MenuItem({this.title, this.menuItemIcon});
+  MenuItem({this.menuItemIcon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        IconButton(
-            tooltip: this.title, icon: this.menuItemIcon, onPressed: null),
-        Text(
-          this.title,
-          style: TextStyle(
-              fontFamily: "roboto", fontSize: 20, color: Colors.purple),
-        )
-      ],
-    ));
+        child: IconButton(icon: this.menuItemIcon, onPressed: null));
   }
 }
 
