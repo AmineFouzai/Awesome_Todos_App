@@ -1,5 +1,6 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/Assignment.dart';
 import 'package:todo_app/screens/Home.dart';
 import 'package:todo_app/screens/Menu.dart';
 import 'package:todo_app/server/Context.dart';
@@ -159,7 +160,7 @@ class _EventsState extends State<Events> {
             },
             child: ListTile(
               leading: Icon(
-                Icons.local_activity,
+                Icons.event,
                 color: Colors.purpleAccent,
                 size: 50,
               ),
@@ -231,10 +232,10 @@ class _EventsState extends State<Events> {
         fabOpenColor: Colors.purpleAccent,
         children: <Widget>[
           IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.local_activity),
               color: Colors.white,
               onPressed: () {
-                addToAny(context, Home());
+                addToAny(context, Home(), todos);
               }),
           IconButton(
               icon: Icon(Icons.event),
@@ -243,7 +244,9 @@ class _EventsState extends State<Events> {
           IconButton(
               icon: Icon(Icons.assignment),
               color: Colors.white,
-              onPressed: _addEventItem),
+              onPressed: () {
+                addToAny(context, Assignment(), events);
+              }),
         ],
       ),
     ));

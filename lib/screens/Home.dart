@@ -1,6 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/Assignment.dart';
+import 'package:todo_app/screens/Events.dart';
 import 'package:todo_app/screens/Menu.dart';
 import 'package:todo_app/server/Context.dart';
 
@@ -198,7 +199,7 @@ class _HomeState extends State<Home> {
           },
         ),
         backgroundColor: Colors.purpleAccent,
-        title: Text("Todo App"),
+        title: Text("Todos"),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -233,17 +234,22 @@ class _HomeState extends State<Home> {
         fabOpenColor: Colors.purpleAccent,
         children: <Widget>[
           IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.local_activity),
               color: Colors.white,
               onPressed: _addTodoItem),
           IconButton(
-              icon: Icon(Icons.event),
-              color: Colors.white,
-              onPressed: _addTodoItem),
+              icon: Icon(Icons.event, color: Colors.white),
+              onPressed: () {
+                addToAny(context, Events(), events);
+              }),
           IconButton(
-              icon: Icon(Icons.assignment),
-              color: Colors.white,
-              onPressed: _addTodoItem),
+              icon: Icon(
+                Icons.assignment,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                addToAny(context, Assignment(), assignments);
+              }),
         ],
       ),
     ));
