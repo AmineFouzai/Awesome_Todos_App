@@ -16,27 +16,54 @@ class MenuItem extends StatelessWidget {
         child: IconButton(
             icon: this.menuItemIcon,
             onPressed: () {
-              if (this.toolTip == "Home") {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                );
-              } else if (this.toolTip == "Events") {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Events()),
-                );
-              } else if (this.toolTip == "Assignment") {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Assignment()),
-                );
-              } else if (this.toolTip == "Settings") {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Settings()),
-                );
+              switch (this.toolTip) {
+                case "Home":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
+                  break;
+                case "Events":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Events()),
+                  );
+                  break;
+                case "Assignment":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Assignment()),
+                  );
+                  break;
+                case "Settings":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
+                  );
+                  break;
+                default:
               }
+              // if (this.toolTip == "Home") {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => Home()),
+              //   );
+              // } else if (this.toolTip == "Events") {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => Events()),
+              //   );
+              // } else if (this.toolTip == "Assignment") {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => Assignment()),
+              //   );
+              // } else if (this.toolTip == "Settings") {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => Settings()),
+              //   );
+              // }
             }));
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/screens/Assignment.dart';
 import 'package:todo_app/screens/Events.dart';
 import 'package:todo_app/screens/Menu.dart';
-import 'package:todo_app/server/Context.dart';
+import 'package:todo_app/server/MainContext.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
