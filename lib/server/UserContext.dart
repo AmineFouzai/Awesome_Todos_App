@@ -1,4 +1,4 @@
-final List<String> users = ['ala', '123'];
+final List<String> users = ['thehanterx2@gmail.com', '123456'];
 
 bool login(email, pass) {
   return users.indexOf(email) != -1

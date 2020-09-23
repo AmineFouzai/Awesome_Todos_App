@@ -3,7 +3,7 @@ import 'package:todo_app/screens/Home.dart';
 import 'package:todo_app/server/UserContext.dart';
 
 class User extends StatefulWidget {
-  User({Key key}) : super(key: key);
+  User();
 
   @override
   _UserState createState() => _UserState();
@@ -16,6 +16,7 @@ class _UserState extends State<User> {
 
   @override
   Widget build(BuildContext context) {
+    print(logedIn);
     return logedIn == false
         ? Scaffold(
             resizeToAvoidBottomPadding: false,

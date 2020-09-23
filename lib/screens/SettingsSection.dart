@@ -3,7 +3,8 @@ import "package:flutter/material.dart";
 class SettingsSection extends StatefulWidget {
   final String sectionTitle;
   final Icon sectionIcon;
-  SettingsSection({this.sectionTitle, this.sectionIcon});
+  final Widget route;
+  SettingsSection({this.sectionTitle, this.sectionIcon, this.route});
 
   @override
   _SettingsSectionState createState() => _SettingsSectionState();
@@ -19,9 +20,8 @@ Widget Hr() {
 }
 
 class _SettingsSectionState extends State<SettingsSection> {
-  _actionRouter(context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Text("in development")));
+  _actionRouter(context, child) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => child));
   }
 
   @override
@@ -50,7 +50,7 @@ class _SettingsSectionState extends State<SettingsSection> {
         ),
         GestureDetector(
             onTap: () {
-              _actionRouter(context);
+              _actionRouter(context, widget.route);
             },
             child: Container(
               child: Row(
